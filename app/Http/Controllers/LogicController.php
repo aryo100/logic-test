@@ -28,4 +28,46 @@ class LogicController extends Controller
             return response()->json(['message' => 'Tidak semua huruf sama'], 400);
         }
     }
+
+    function longLetter(Request $request) {
+        $sentence = str_replace(' ', '', strtolower($request->word));
+        $letterCount = [];
+    
+        foreach (str_split($sentence) as $letter) {
+            if (isset($letterCount[$letter])) {
+                $letterCount[$letter]++;
+            } else {
+                $letterCount[$letter] = 1;
+            }
+        }
+    
+        $mostFrequentLetter = null;
+        $maxCount = 0;
+    
+        foreach ($letterCount as $letter => $count) {
+            if ($count > $maxCount) {
+                $mostFrequentLetter = $letter;
+                $maxCount = $count;
+            }
+        }
+    
+        if ($mostFrequentLetter !== null) {
+            return response()->json(['message' => "Huruf $mostFrequentLetter muncul sebanyak $maxCount kali"], 200);
+        } else {
+            return response()->json(['message' => 'Tidak ada huruf yang muncul'], 400);
+        }
+    }
+
+    function matriksInverse(Request $request) {
+        $n = $request->array;
+        for ($i = 0; $i < $n; $i++) {
+            for ($j = 0; $j < $n; $j++) {
+                $array[$i][$j] = ($i == $j) ? $n : 0;
+            }
+        }
+    
+        foreach ($array as $row) {
+            echo implode(' ', $row) . PHP_EOL;
+        }
+    }
 }

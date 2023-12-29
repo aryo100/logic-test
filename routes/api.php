@@ -22,6 +22,8 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 });
 
 Route::post('same-word', [LogicController::class, 'sameWord']);
+Route::post('long-letter', [LogicController::class, 'longLetter']);
+Route::post('matriks-inverse', [LogicController::class, 'matriksInverse']);
 
 Route::get('barang', [BarangController::class, 'index']);
 Route::post('barang', [BarangController::class, 'store']);
